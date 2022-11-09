@@ -1,0 +1,33 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package clientserver;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.Socket;
+import java.util.Scanner;
+
+/**
+ *
+ * @author Omar
+ */
+public class ClientServer {
+    public static void main (String [] args) throws IOException{
+        Scanner x=new Scanner (System.in);
+        System.out.println ("Enter the message to the sender:");
+        String message = x.nextLine();
+        Socket ClientSocket = new Socket ("Thinkpad-E570",6789);
+        DataOutputStream Outtoserver = new DataOutputStream (ClientSocket.getOutputStream());
+        Outtoserver.writeBytes(message+'\n');
+        BufferedReader inFromServer = new BufferedReader(new InputStreamReader( ClientSocket.getInputStream()));
+        String mmessage = inFromServer.readLine();
+        System.out.println(mmessage);
+    }
+}
+
+    
